@@ -11,22 +11,22 @@ headers = {
 
 # Step 1 - Create session
 session_response = requests.post(
-    "https://api.anthropic.com/v1/agents/agent_011CaoyQtSVqDWCr12D4KcJS/sessions",
+    "https://api.anthropic.com/v1/managed-sessions",
     headers=headers,
     json={
+        "agent_id": "agent_011CaoyQtSVqDWCr12D4KcJS",
         "environment_id": "env_013xv59MM2UtmLmsQ6S3NDBf",
         "vault_ids": ["vlt_011CaoZ9snbHpYLFSEZPrsiM"]
     }
 )
 
+print("Session response:", session_response.status_code, session_response.text)
 session = session_response.json()
-print("Session created:", session)
-
 session_id = session["id"]
 
 # Step 2 - Send message
 message_response = requests.post(
-    f"https://api.anthropic.com/v1/agents/agent_011CaoyQtSVqDWCr12D4KcJS/sessions/{session_id}/events",
+    f"https://api.anthropic.com/v1/managed-sessions/{session_id}/events",
     headers=headers,
     json={
         "type": "user_message",
@@ -34,4 +34,4 @@ message_response = requests.post(
     }
 )
 
-print("Message sent:", message_response.json())
+print("Mess
