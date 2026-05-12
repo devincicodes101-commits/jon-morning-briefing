@@ -42,7 +42,7 @@ def run_daily_briefing():
     print("Message:", message_response.status_code, message_response.text)
 
 # 9:00 AM GMT-4 = 13:00 UTC
-schedule.every().day.at("13:00").do(run_daily_briefing)
+schedule.every().day.at("12:00").do(run_daily_briefing)
 
 while True:
     schedule.run_pending()
